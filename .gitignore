@@ -1,0 +1,18 @@
+# Terraform
+**/*.tfstate
+**/*.tfstate.backup
+**/*.tfplan
+**/.terraform
+**/*.tfvars
+**/*.auto.tfvars
+**/crash.log
+backend.tf
+
+# OSX
+**/.DS_Store
+**/.AppleDouble
+**/.LSOverride
+**/.history
+
+# IDE
+**/*.swp

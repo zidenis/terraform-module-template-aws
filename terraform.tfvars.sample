@@ -1,0 +1,6 @@
+aws_account_id = #AWS_ACCOUNT_ID
+use_s3_backend = true
+tfstate_s3_bucket_name = "#TFSTATE_BUCKET"
+# aws_region = "us-east-1"
+# aws_profile = "default"
+# env = "undefined"

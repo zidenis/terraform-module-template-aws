@@ -1,0 +1,27 @@
+repos:
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.96.2
+    hooks:
+      - id: terraform_validate
+      - id: terraform_fmt
+      - id: terraform_tflint
+        args:
+          - --args=--config=__GIT_WORKING_DIR__/.tflint.hcl
+      - id: terraform_trivy
+      - id: terraform_checkov
+        name: "Terraform validate with Checkov"
+        args:
+          - --args=--quiet
+      - id: terraform_docs
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: detect-aws-credentials
+        name: "Pre-commit detect AWS credentials"
+      - id: detect-private-key
+        name: "Pre-commit detect private keys"
+      - id: end-of-file-fixer
+        name: "Pre-commit fix end of files"
+      - id: trailing-whitespace
+        name: "Pre-commit remove trailing whitespaces"
