@@ -5,6 +5,7 @@ AWS_CLI_INSTALLED=$(which aws)
 
 GREP_COLORS="never"
 AWS_PROFILE="default"
+echo "Backend child module setup..."
 AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query "Account" --profile ${AWS_PROFILE})
 sed "s/#AWS_ACCOUNT_ID/${AWS_ACCOUNT_ID}/" terraform.tfvars.sample > terraform.tfvars
 terraform -chdir=modules/S3_backend init | grep -i "initialized"
@@ -13,6 +14,8 @@ TFSTATE_BUCKET=$(terraform -chdir=modules/S3_backend output -raw tfstate_bucket)
 TFSTATE_KMS_KEY=$(terraform -chdir=modules/S3_backend output -raw tfstate_kms_key)
 TFSTATE_LOCK_TABLE=$(terraform -chdir=modules/S3_backend output -raw tfstate_lock_table)
 sed -i "s/#TFSTATE_BUCKET/${TFSTATE_BUCKET}/" terraform.tfvars
+echo "Root module setup..."
+terraform init | grep -i "initialized"
 terraform import module.backend[0].aws_kms_key.tfstate_kms_key ${TFSTATE_KMS_KEY} | grep "Import "
 terraform import module.backend[0].aws_s3_bucket.tfstate_bucket ${TFSTATE_BUCKET} | grep "Import "
 terraform import module.backend[0].aws_s3_bucket_lifecycle_configuration.tfstate_bucket_lifecycle ${TFSTATE_BUCKET}  | grep "Import "
@@ -31,4 +34,5 @@ terraform {
   }
 }
 HEREDOC
-terraform init -migrate-state -force-copy | grep "backend"
+terraform init -migrate-state -force-copy | grep "the backend"
+terraform apply -auto-approve | grep -E "^Apply" -A 6

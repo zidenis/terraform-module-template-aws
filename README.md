@@ -12,6 +12,16 @@ This template serves as a foundation for creating Terraform modules to provision
 - Creates a DynamoDB table for state locking
 - Configurable through input variables
 
+### Usage
+
+```bash
+$ git clone https://github.com/zidenis/terraform-module-template-aws.git
+
+cd terraform-module-template-aws
+
+./backend_bootstrap.sh
+```
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
