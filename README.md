@@ -15,11 +15,25 @@ This template serves as a foundation for creating Terraform modules to provision
 ### Usage
 
 ```bash
-$ git clone https://github.com/zidenis/terraform-module-template-aws.git
+aws configure # You will need the AWS CLI installed. Set up AWS credentials with privileges to provision resources.
 
-cd terraform-module-template-aws
+git clone https://github.com/zidenis/terraform-module-template-aws.git my-terraform-module
 
-./backend_bootstrap.sh
+cd my-terraform-module
+
+git remote remove origin # We remove the original remote to start our own module.
+
+# Do not run the bellow script if you already installed the development toots.
+chmod +x environment_setup.sh; ./environment_setup.sh # optionally, use this bash script to set up the environment with the required tools.
+
+# Do not run the bellow script if your intention is to developt the module locally.
+chmod +x backend_bootstrap.sh; ./backend_bootstrap.sh # optionally, use this bash script to set up the remote backend.
+
+source ~/.venv/bin/activate
+
+pre-commit install --install-hooks # set up your git repository to run pre-commit hooks automatically.
+
+pre-commit run -a # optionally, run pre-commit hooks against all the files.
 ```
 
 <!-- BEGIN_TF_DOCS -->

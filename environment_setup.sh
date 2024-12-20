@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/bash
 
 cat << EOF
 Terraform development environment setup
@@ -110,5 +110,7 @@ rm $(echo $TFLINT_LATEST | grep -o -E "tflint_linux.+")
 rm $(echo $TRIVY_LATEST | grep -o -E "trivy_.+")
 
 rm ./vscode.deb
+
+source ~/.bashrc
 
 echo -e "\n...finished."
