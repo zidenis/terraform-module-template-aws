@@ -80,23 +80,3 @@ resource "aws_s3_bucket_lifecycle_configuration" "tfstate_bucket_lifecycle" {
     }
   }
 }
-
-# tfsec:ignore:aws-dynamodb-table-customer-key
-# tfsec:ignore:aws-dynamodb-enable-recovery
-resource "aws_dynamodb_table" "tfstate_lock_table" {
-  #checkov:skip=CKV_AWS_28:no need for PITR
-  #checkov:skip=CKV_AWS_119:no need for DynamoDB Tables with encryption with KMS CMK
-  name         = "${aws_s3_bucket.tfstate_bucket.id}-lock-table"
-  billing_mode = "PAY_PER_REQUEST"
-  hash_key     = "LockID"
-
-  attribute {
-    name = "LockID"
-    type = "S"
-  }
-
-  tags = {
-    Name = "${aws_s3_bucket.tfstate_bucket.id}-lock-table"
-    env  = var.env
-  }
-}

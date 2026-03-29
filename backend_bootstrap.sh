@@ -12,7 +12,6 @@ terraform -chdir=modules/S3_backend init | grep -i "initialized"
 terraform -chdir=modules/S3_backend apply -auto-approve -var-file="../../terraform.tfvars" | grep -E "(^Apply|will be created)"
 TFSTATE_BUCKET=$(terraform -chdir=modules/S3_backend output -raw tfstate_bucket)
 TFSTATE_KMS_KEY=$(terraform -chdir=modules/S3_backend output -raw tfstate_kms_key)
-TFSTATE_LOCK_TABLE=$(terraform -chdir=modules/S3_backend output -raw tfstate_lock_table)
 sed -i "s/#TFSTATE_BUCKET/${TFSTATE_BUCKET}/" terraform.tfvars
 echo "Root module setup..."
 terraform init | grep -i "initialized"
@@ -22,7 +21,6 @@ terraform import module.backend[0].aws_s3_bucket_lifecycle_configuration.tfstate
 terraform import module.backend[0].aws_s3_bucket_public_access_block.tfstate_bucket_access ${TFSTATE_BUCKET}  | grep "Import "
 terraform import module.backend[0].aws_s3_bucket_server_side_encryption_configuration.tfstate_bucket_encryption ${TFSTATE_BUCKET} | grep "Import "
 terraform import module.backend[0].aws_s3_bucket_versioning.tfstate_bucket_versioning ${TFSTATE_BUCKET} | grep "Import "
-terraform import module.backend[0].aws_dynamodb_table.tfstate_lock_table ${TFSTATE_LOCK_TABLE}  | grep "Import "
 AWS_REGION="$(terraform output -raw aws_region)"
 cat > backend.tf << HEREDOC
 terraform {
@@ -30,7 +28,7 @@ terraform {
     bucket = "${TFSTATE_BUCKET}"
     key = "terraform.tfstate"
     region = "${AWS_REGION}"
-    dynamodb_table = "${TFSTATE_LOCK_TABLE}"
+    use_lockfile = true
   }
 }
 HEREDOC

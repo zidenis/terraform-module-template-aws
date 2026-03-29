@@ -9,7 +9,7 @@ This template serves as a foundation for creating Terraform modules to provision
   - Versioning enabled
   - Lifecycle rules for noncurrent object transition and expiration
   - Blocked public access for enhanced security
-- Creates a DynamoDB table for state locking
+  - state locking
 - Configurable through input variables
 
 ### Usage
@@ -41,8 +41,8 @@ pre-commit run -a # optionally, run pre-commit hooks against all the files.
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.10.2 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.80.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.14.8 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 6.38.0 |
 
 ## Providers
 
