@@ -28,14 +28,14 @@ sync_b_to_a() {
 sync_a_to_b
 
 echo "$(date) : watching ${SRC_A} -> ${SRC_B}"
-inotifywait -mr -e modify,create,delete,move "${SRC_A}" |
+inotifywait -mr -e modify,create,delete,move --exclude '(^|/)\.git/' --exclude '(^|/)\.terraform/' "${SRC_A}" |
 while read -r path action file; do
   echo "$(date) : ${path} : ${action} : ${file}"
   sync_a_to_b
 done &
 
 echo "$(date) : watching ${SRC_B} -> ${SRC_A}"
-inotifywait -mr -e modify,create,delete,move "${SRC_B}" |
+inotifywait -mr -e modify,create,delete,move --exclude '(^|/)\.git/' --exclude '(^|/)\.terraform/' "${SRC_B}" |
 while read -r path action file; do
   echo "$(date) : ${path} : ${action} : ${file}"
   sync_b_to_a
