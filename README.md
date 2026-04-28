@@ -40,9 +40,9 @@ pre-commit run -a # optionally, run pre-commit hooks against all the files.
 ## Requirements
 
 | Name | Version |
-|------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.14.8 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 6.38.0 |
+| ---- | ------- |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.14.9 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 6.42.0 |
 
 ## Providers
 
@@ -51,7 +51,7 @@ No providers.
 ## Modules
 
 | Name | Source | Version |
-|------|--------|---------|
+| ---- | ------ | ------- |
 | <a name="module_backend"></a> [backend](#module\_backend) | ./modules/S3_backend | n/a |
 
 ## Resources
@@ -61,7 +61,7 @@ No resources.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_aws_account_id"></a> [aws\_account\_id](#input\_aws\_account\_id) | AWS Account ID. | `string` | n/a | yes |
 | <a name="input_aws_profile"></a> [aws\_profile](#input\_aws\_profile) | Name of the AWS profile. | `string` | `"default"` | no |
 | <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | AWS Region. | `string` | `"us-east-1"` | no |
@@ -72,7 +72,7 @@ No resources.
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_aws_region"></a> [aws\_region](#output\_aws\_region) | Region used for the terraform state bucket. |
 | <a name="output_tfstate_bucket"></a> [tfstate\_bucket](#output\_tfstate\_bucket) | The name used for the terraform state bucket. |
 <!-- END_TF_DOCS -->

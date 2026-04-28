@@ -8,6 +8,8 @@ repos:
         args:
           - --args=--config=__GIT_WORKING_DIR__/.tflint.hcl
       - id: terraform_trivy
+        args:
+          - --args=--quiet
       - id: terraform_checkov
         name: "Terraform validate with Checkov"
         args:

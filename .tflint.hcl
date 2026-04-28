@@ -1,5 +1,5 @@
 tflint {
-  required_version = "~> 0.61.0"
+  required_version = "~> 0.62.0"
 }
 
 plugin "terraform" {
@@ -9,9 +9,11 @@ plugin "terraform" {
 
 plugin "aws" {
   enabled = true
-  version = "0.46.0"
+  version = "0.47.0"
   source  = "github.com/terraform-linters/tflint-ruleset-aws"
-  deep_check = true
+  # deep checking e precisa de credenciais AWS para validar recursos contra a AWS.
+  # Habilite se estiver com credenciais válidas e precisar de validação mais rigorosa
+  deep_check = false
 }
 
 rule "aws_resource_missing_tags" {
