@@ -1,0 +1,3 @@
+# DS-0026 (LOW): Add HEALTHCHECK instruction in your Dockerfile
+# HEALTHCHECK em devcontainer não tem utilidade
+DS-0026
