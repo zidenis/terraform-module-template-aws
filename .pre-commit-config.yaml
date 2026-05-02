@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.96.2
+    rev: v1.105.0
     hooks:
       - id: terraform_validate
       - id: terraform_fmt
@@ -17,13 +17,19 @@ repos:
       - id: terraform_docs
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       - id: detect-aws-credentials
-        name: "Pre-commit detect AWS credentials"
+        args: [--allow-missing-credentials]
+        name: "Pre-commit hook: checks for the existence of AWS secrets"
       - id: detect-private-key
-        name: "Pre-commit detect private keys"
+        name: "Pre-commit hook: checks for the existence of private keys"
       - id: end-of-file-fixer
-        name: "Pre-commit fix end of files"
+        name: "Pre-commit hook: makes sure files end in a newline and only a newline"
       - id: trailing-whitespace
-        name: "Pre-commit remove trailing whitespaces"
+        name: "Pre-commit hook: trims trailing whitespace"
+      - id: check-merge-conflict
+        name: "Pre-commit hook: check for files that contain merge conflict strings"
+      - id: mixed-line-ending
+        args: [--fix=no]
+        name: "Pre-commit hook: checks mixed line ending"
