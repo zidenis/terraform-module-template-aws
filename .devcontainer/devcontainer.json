@@ -10,7 +10,6 @@
     	"source=${localWorkspaceFolder},target=/tmp/src,type=bind,consistency=cached"
     ],
 	"postCreateCommand": "tenv terraform install $(head /tmp/src/.terraform-version) && rsync -a /tmp/src/ ${HOME}/workspace/ && sudo chown -R vscode:vscode ${HOME}/workspace",
-	"postStartCommand": "nohup ${HOME}/sync-dirs.sh > ${HOME}/sync-dirs.log 2>&1 &",
 	"customizations": {
 		"vscode": {
 			"extensions": [
